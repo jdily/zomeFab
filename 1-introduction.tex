@@ -1,0 +1,47 @@
+%\firstsection{Introduction}
+%!TEX root = zomeFab.tex
+\section{Introduction}
+\label{sec:introduction}
+
+% The production cost of 3D printer has been declining and it's availability for everyone leads to the emergence of large amount of applications. 
+The recent widespread of consumer\chinky{-}level 3D printer lead to the emergence of large amount academic and industrial fabrication applications.
+However, the consumer-level 3D printers have several shortcomings including long printing time, limited output size and \chinky{the } high cost of materials. 
+In order to address these shortcomings, many of the researches are proposed.
+% There are several approaches and researches aim to solve these drawbacks. 
+For saving time and materials, the modern 3D printers allow user\chinky{s} to save materials by switching between different fill-rate settings.
+Meanwhile, different internal patterns are proposed~\cite{Lu:2014:BSW} to save materials while maintain\chinky{ing} the \chireplace{structure}{structural} soundness.
+% provide different fill-rate settings to use less material and research like~\cite{Lu:2014:BSW} can save materials effectively. 
+% The size of objects that 3D printing can produce are typically limited by 3D printers. 
+For building a large-scale fabrication, lots of researches \cite{Medell:2007:ALRP, Hao:2011:APLM, Luo:2012:CPM, Hu:2014:APS, Vanek:2014:PMVO} focus on this problem and share the spirit of partitioning the object into sub-part\chinky{s} that can be fitted into printing volume.
+% They all have same characteristic that partition the object to fit the size, then assembling printed parts.
+
+% The requirements for a large-scale fabrication will enlarge the drawbacks as mentioned above.
+However, the saving of time and material from existing methods are still not sufficient for large-scale shape fabrication.
+% It turns out that even we employ state-of-the-art methods, time and material spending are still too high. 
+\chireplace{To decrease cost extremely}{To immensely decrease the cost}, our novel idea is to combine 3D printing with another structure. 
+That desire structure must meet several criteria such as (i) easy to assemble, (ii) re-usable, and (iii) robustness, so that the resulted fabricated shape is simple to build and reliable simultaneously. 
+Base on our requirements, the popular modeling system, \ie~\emph{Zometool}~\cite{davis2007mathematics}, is suitable for coarse fabrication.
+In addition to the above advantages, \emph{Zometool} still has several \chireplace{good}{excellent} characteristics: 
+(i) structural properties, such as stability, expandability and lightness satisfying the requirements for large-scale fabrication. 
+(ii) Independent structure and modularity can parallelize the construction to speed up the building process.
+Hence, Zometool is a \chireplace{good}{attractive} candidate to replace solid 3D printing material as the \chireplace{inner robust}{robust inner} structure of large-scale structure.
+Therefore, the goal of this work is to develop a computational method that combines Zometool structure and 3D printing to reduce the time and material costs in large-scale fabrication.
+% In this paper, we present a novel method, called ZomeFab, that can automatically generate both outer shell and inner Zometool structures approximating to a given 3D input mesh.
+Given the desired 3D shape, we design an optimization process to synthesize the inner Zometool structure, which balance\chinky{s} between the shape similarity and structure complexity.
+We leverage Simulated Annealing to explore the huge structure space effectively.
+% We first perform mesh segmentation to split the complex 3D mesh into different shape parts.
+% For each part, we fit the smallest cube of Zometool structure as initial inner structure.
+% From the initial Zometool structure, we use Simulated Annealing algorithm to effectively explore the huge structure space.
+Next, with the optimized Zometool structure, we hollowed the shape to obtain the outer shell and partition the outer shell \chireplace{with respect to}{concerning} several criteria including simplicity and printability.
+We formulate these criteria in a single MRF problem and solve it with graph-cut algorithm~\cite{boykov:2004:experimental}.
+We also design a \chireplace{special}{particular} type of connectors \chireplace{and}{furthermore,} optimize their positions for assembling the inner Zometool structure and outer shell.
+
+There are two primary contributions in this paper:
+\begin{enumerate}
+\item We propose an optimization framework to synthesize the inner Zometool structure to replace the solid printed materials in large-scale fabrication, which greatly reduce the printing cost including time and materials.
+% Filled by Zometool structure instead of solid printed is greatly reduce the printing cost including time and materials.
+\item We design and print a special connector and optimize their layout for better combining both inner Zometool structure and outer printed shell.
+\end{enumerate}
+
+% The rest of this paper is organized as follows. In  \secname~\ref{sec:relatedwork}, we surveyed several previous methods for computational fabrication and applications of modeling system Zometool.  \secname~\ref{sec:Zometool}, \secname~\ref{sec:surf_part} and \secname~\ref{sec:fab} describe the three main stages of our method: \emph{Zometool construction}, \emph{surface partition} and \emph{Fabrication}, respectively. In \secname~\ref{sec:result}, we demonstrate the results of our method.
+% Finally, we make a conclusion in  \secname~\ref{sec:conclusion}.

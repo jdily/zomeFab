@@ -1,0 +1,86 @@
+\section{Surface Partition}
+\label{sec:surf_part}
+
+We aim to decompose the surface into different partitions for 3D printing with the optimized Zometool structure $\mathcal{Z}$ from \secname~\ref{sec:Zometool}.
+Naively, we can simply compute the distance from each triangle $t$ to all the nodes in $\mathcal{Z}$, and assign $t$ to the nearest node as it's label.
+However, inconsistency may arise among adjacent triangles,  leading to unsatisfactory visual effects and assembly complexities (numerous small partitions might exist, see \figname~\ref{fig:nearest}). 
+To address this issue, we formulate the problem as a multi-label graph cut minimization.
+As each triangle $t$ can potentially correspond to different Zometool node, it gets assigned data cost for different corresponding nodes.
+Given $n$ elements, $k$ labels and $n\cdot k$ costs, finding the minimum assignment is a combinatorial problem and typical NP-hard.
+We employ Boykov~\cite{boykov:2004:experimental} to solve it. \par
+% with label consistency and sparsity.
+After the reclassification, we have to find the method which can separate different labels. There are many partition methods we can choose. Because our result have to assemble, our segment can't have the sharp edges which may increase the assembling complexity. The planar-cut is our first choice. However, generating the cut-plane in 3{D} is very hard, so we follow Wang~\cite{wang2016improved} and use the Support Vector Machine (SVM)~\cite{cortes1995support} classifier to find our cut-plane. The following context will describe more implementation details about graph cut and cut-plane.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\linewidth]{figs/nearest_node.pdf} 
+\caption{Simple classification. We assign each triangle to it's nearest node. But there are too many labels and some regions are too small for 3D printer to print it, So, we need to reclassify the result.}
+\label{fig:nearest}
+\end{figure}
+
+\subsection{Graph cut}
+\paragraph{Optimization energy}
+We compute the assignment function $f$ that assign label to each triangle $t$, where $t \in T$, such that the labeling $f$ minimize the following energy $E(f)$:
+\begin{align} \label{eq:graph}
+E(f) = w_{data} * \sum_{t\in T}D(t, f_t) + w_{smoothness} * \sum_{t,s\in N} S(t, s, f_t, f_s),
+\end{align}
+and we optimize this function using multi-label graph-cut algorithm proposed by Boykov~\cite{boykov:2004:experimental}.
+In our setting, the entire outer nodes of $\mathcal{Z}$ are complete possible label set $L$.
+This $E(f)$ consists of two separate terms, i.e. data and smoothness.
+Next, we will explain each term in more detail.
+
+\subsubsection{Data cost}
+Data cost measures how well a triangle $t$ covers a node $p \in P$.
+This cost is simply defined as the distance of the nearest node to the triangle.
+\begin{align}
+D(t, f_t) = -\omega \log(\mathcal{P}(p | t)),
+% D(p,f_p) = \displaystyle\min_{p \in P}(d(t, p))
+\end{align}
+where $\mathcal{P}(p | t)$ is the probability of that triangle $t$ belong to the node label $p$, and $\omega$ is a constant that
+regulates the influence of the data term in the total energy.
+Here, we simply define $\mathcal{P}(p | t)$ as $1/d(t,p)$, where $d(t,p)$ is the distance of the node to the triangle.
+\subsubsection{Smoothness cost}
+Smoothness term measures the spatial consistency of neighboring elements.
+\begin{align}
+S(t, s, l_t, l_s) = 
+\begin{cases}
+0, & \text{if } l_t = l_s, \\
+-\log(\theta_{t,s}/\pi)\varphi_{t,s} + w_{saliency} * E_{saliency}(t), & \text{otherwise} 
+\end{cases}
+\end{align}
+where $\theta_{p,q}$ and $\varphi_{p,q}$ are the dihedral angle and distance between triangle $p$ and $q$, respectively.
+With the smoothness term, two adjacent triangles are likely to have consistent labels.
+
+\paragraph{User-guided saliency} 
+Every mesh have some features, such as eyes, nose or other unique objects. But we can't get the feature information by only use relation of adjacent triangles. If we don't assign some information during process of graph cut, the result just like left of \figname~\ref{fig:saliency}, the mouth and nose will be split in later process. Our saliency information is given by user guidance. For example (see middle of \figname~\ref{fig:saliency}), the user think the mouse and the nose is the important feature on mesh, so mark those parts and hope the parts don't be split in later process. Since we give the saliency information, the marked regions usually assign in the same part and prevent the slice seam on those regions.
+
+\begin{align}
+E_{saliency}(t) = 
+\begin{cases}
+0, & \text{if triangle isn't tagged}, \\
+1, & \text{otherwise} 
+\end{cases}
+\end{align}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\linewidth]{figs/saliency.pdf} 
+\caption{User-guided saliency. Origin result of graph cut may split some feature on the mesh. (Left of the figure) In order to solve it, we ask user to mark the unique feature. (Red region in the middle of the figure) We add those information for graph cut, and precent those regions from separating into multiple parts. (Right of the figure)} 
+\label{fig:saliency}
+\end{figure}
+
+\subsubsection{Our result}
+Before the reclassification, there are too many labels (60 labels in \figname~\ref{fig:nearest}) and some labels are too small. Therefore, we use graph cut algorithm to optimize the energy function (Equation \ref{eq:graph}) which we design the data and smoothness cost. After the optimization, we get the result which has 11 labels. Each label has better shape and size than that before reclassification. (See \figname~\ref{fig:cut_plane}(a)) Then, we have to separate each label into pieces for 3{D} printing.
+
+\subsection{Cut-plane}
+There are many methods for mesh segmentation. The simple method is collecting all triangles of graph cut label, but it will cause the sharp edge. For easily assembling, we have to split the triangles and keep the contact surface between different labels smooth. We choose the planar cut for our method. It is very difficult to find a plane in 3{D} space because of the varied plane normal vectors. We choose the Support Vector Machine (SVM) to help us reach our goal. The following context will describe more details about SVM and how it works in our method.
+
+We use the SVM classifier to generate the cut-plane. The different label of vertex is our input for training. Then, we can get the hyperplane which will separate different labels of data. But we don't have to know the hyperplane which separate the nonadjacent labels. So before we start training, we find the neighbor pair and use the information that can let us know which hyperplane needs for split the label.  By collecting all the hyperplanes, like \figname~\ref{fig:cut_plane}, we can use those planes for segmentation.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\linewidth]{figs/cut_plane1.pdf} 
+\caption{(a) Result of graph cut (b) Cut-plane generated by SVM classifier (c) Cutting result} 
+\label{fig:cut_plane}
+\end{figure}
+
