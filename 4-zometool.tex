@@ -1,14 +1,14 @@
 \section{Zometool construction}
 \label{sec:Zometool}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\linewidth]{figs/Zometool_init.pdf} 
-\caption{
-\ichao{this figure is too space wasting..Maybe just put a small cube as inset in the corresponding location in paper.}
-Given input shape (a), we initialize the Zometool structure with cubes (b), and obtain the optimized result (c) by using Simulated Annealing as described in \secname~\ref{sec:Zometool}.}
-\label{fig:Zometool_cont}
-\end{figure}
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=\linewidth]{figs/Zometool_init.pdf} 
+% \caption{
+% \ichao{this figure is too space wasting..Maybe just put a small cube as inset in the corresponding location in paper.}
+% Given input shape (a), we initialize the Zometool structure with cubes (b), and obtain the optimized result (c) by using Simulated Annealing as described in \secname~\ref{sec:Zometool}.}
+% \label{fig:Zometool_cont}
+% \end{figure}
 
 % The goal of our method is devising an algorithm to construct an object composed of Zometool structures and 3D-printed parts with the following objectives:
 % \begin{itemize}
@@ -17,10 +17,25 @@ Given input shape (a), we initialize the Zometool structure with cubes (b), and 
 %     \item \textit{easy-to-assemble} We should reduce the difficulties of assemble both Zometool structure and outer printed shell. In terms of Zometool, we should minimize the usage of nodes and rods, so to reduce the assemble time.
 % \end{itemize}
 
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=1.0\linewidth]{figs/Zometool.pdf} 
+% \caption{
+% The standard Zometool components}
+% \label{fig:Zometool}
+% \end{figure}
+
+\begin{wrapfigure}{R}{0.3\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{figs/Zometool.pdf}
+% \caption{The standard Zometool components}
+\label{fig:Zometool}
+\end{wrapfigure}
+
 \subsection{Introduction to Zometool}
 Zometool is widely used as educational toys to replicate complicated scientific structures such as chemical structures. 
 The rods in standard Zometool system have three different types tenons, \ie~blue for rectangle, red for pentagonal and yellow for triangle.
-Each type of rod also has three different sizes (see \figname~\ref{fig:Zometool}).
+Each type of rod also has three different sizes (see inset).
 We denote $(b_0$, $b_1$, $b_2)$ as three different lengths of blue rods ($(r_0$, $r_1$, $r_2)$ for red rod, and $(y_0$, $y_1$, $y_2)$ for yellow rod).
 % Also, $r_0$, $r_1$, $r_2$ are the red rods, and $y_0$, $y_1$, $y_2$ are for yellow rods. 
 There are totally 62 slots on the Zome-ball, including 30 rectangular slots, 12 pentagonal slots and 20 triangular slots. 
@@ -39,13 +54,21 @@ Please refer to~\cite{davis2007mathematics} for more detail about the underlying
 % Each type of them has three different sizes. 
 % If we put the Zome-ball in x-y-z coordinate, we can get 62 fix vectors which correspond to slots. And we also can get 186 positions which is from the center of Zome-ball to the end point of rods. This information can improve the accuracy in computation.
 
-\begin{figure}[ht]
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=\linewidth]{figs/Zometool_init.pdf} 
+% \caption{
+% \ichao{this figure is too space wasting..Maybe just put a small cube as inset in the corresponding location in paper.}
+% Given input shape (a), we initialize the Zometool structure with cubes (b), and obtain the optimized result (c) by using Simulated Annealing as described in \secname~\ref{sec:Zometool}.}
+% \label{fig:Zometool_cont}
+% \end{figure}
+
+\begin{wrapfigure}{R}{0.1\textwidth}
 \centering
-\includegraphics[width=1.0\linewidth]{figs/Zometool.pdf} 
-\caption{
-The standard Zometool components}
-\label{fig:Zometool}
-\end{figure}
+\includegraphics[width=0.1\textwidth]{figs/Zometool_init2.pdf}
+% \caption{Initialize the Zometool structure with cubes}
+\label{fig:Zometool_cont}
+\end{wrapfigure}
 
 \subsection{Initialization}
 %We first partition $S$ into $m$ segments ($S=\{s_1, \cdots , s_m\}$) using Shape Diameter Function (SDF)~\cite{shapira:2008:consistent} and clustering implemented in CGAL~\cite{cgal}.
@@ -64,8 +87,7 @@ After experimenting different basic structure, such as cube, triangular pyramid,
 % Finally, wants to approach our goal \textbf{fast assembling}. 
 We follow Zimmer~\cite{zimmer:2014:Zometool} with cube as the basic unit to initialize the filling. 
 The major difference from Zimmer~\cite{zimmer:2014:Zometool} is that we choose $b_0$ (the length of shortest blue rod) for our edge length of cube. 
-The reason is that the smaller the cube is, the higher fitting rate we can achieve, and the inner structure will get closer to outer surface.
-(see \figname~\ref{fig:Zometool_cont}(b) for sample initialization). 
+The reason is that the smaller the cube is, the higher fitting rate we can achieve, and the inner structure will get closer to outer surface (see inset for sample initialization). 
 
 %\section{Simulated annealing}
 %After get the initial structure, the structure still too rough and weak for the inner structure. We want to more close to the outer structure and get more robust structure. But the main problem is thousand of possibility of Zometool. So we choose simulated annealing to make the problem be solved. The core of simulated annealing is design the (i) local operation, (ii) energy function and (iii) cooling schedule. The following context will discuss our design detail.
@@ -99,7 +121,7 @@ We follow \cite{zimmer:2014:Zometool} and define the term $F(p)$ called forbidde
 %Please see ~\ref{forbidden} for more details.
 
 \paragraph{Forbidden Zone}
-\note{Even if long distance from surface will cause the higher energy, we still want to accelerate the process.} 
+% \note{Even if long distance from surface will cause the higher energy, we still want to accelerate the process.} 
 During energy computation, the distance have to multiply the additional weight which is called Forbidden zones in \cite{zimmer:2014:Zometool}. 
 $F(p)$ is defined as a quadratically increasing function which depends on the distance between the triangle centroid position $p$ to the nearest node $S$. $F(p)$ will be zero when the distance is smaller than $d_{\text{min}}$ and will be $F_{\text{max}}$ when the distance is larger than $d_{\text{max}}$. 
 After a series of tests, finally we get the best parameters. 
