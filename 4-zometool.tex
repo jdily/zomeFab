@@ -140,8 +140,9 @@ In order to obtain a regular Zometool structure for simple assembling, we intend
 % If the rods are too closer to each other, it is hard to construct them. 
 % We hope the rods become discrete and the structure have suitable angle for construction. Hence, we set the baseline angle to $90^\circ$. This term will make our structure more regular.
 \begin{align}
-E_{\text{reg}}(\mathcal{Z}) = \frac{1}{|\mathcal{N}_i|} \sum_{p_j\in\mathcal{N}_i} (\text{min}(\theta_{ij})-\frac{\pi}{2}),
+E_{\text{reg}}(\mathbf{Z}) = \frac{1}{|\mathcal{N}_i|} \sum_{p_j\in\mathcal{N}_i} (\text{min}(\theta_{ij})-\frac{\pi}{2}),
 \end{align}
+where $\mathcal{N}_i$ are the adjacent struts of strut $i$.
 
 \begin{figure}[ht]
 \centering
@@ -155,7 +156,7 @@ We regularize the optimized Zometool structure to have a good valence for simple
 In order to maximize each Zome-ball's utility and minimize the complexity, we have to set a baseline number of rods as a constrain.
 We set the target valence as $6$ from the initial cube structure.
 \begin{align}
-E_{\text{val}}(\mathcal{Z}) = \sum_{i=1}^{P} \frac{(V_p-6)^2}{6},
+E_{\text{val}}(\mathbf{Z}) = \sum_{i=1}^{P} \frac{(V_p-6)^2}{6},
 \end{align}
 where $V_p$ is the valence of each node.
 
@@ -172,7 +173,7 @@ We penalize the valence that is not 6 (configuration (c) and (d)).
 Let $N$ is the total number of both nodes and struts, and $N_\text{target}$ be the target complexity.
 The simplicity term is encoded as the quadratic differences from the target complexity:
 \begin{align}
-E_{\text{sim}}(\mathcal{Z}) = \frac{1}{N_{\text{target}}}(N-N_{\text{target}})^2,
+E_{\text{sim}}(\mathbf{Z}) = \frac{1}{N_{\text{target}}}(N-N_{\text{target}})^2,
 \end{align}
 % where $N$ is the total number of both nodes and rods.
 
