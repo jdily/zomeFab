@@ -4,31 +4,34 @@
 \label{sec:relatedwork}
 
 \subsection{Computational Fabrication}
-In recent years, computational fabrication has attracted many attentions in the computer graphics and human computer interaction research fields~\cite{Shamir:2016:CTP}.
+In recent years, computational fabrication has attracted many attentions in the computer graphics and human\chinky{-}computer interaction research fields~\cite{Shamir:2016:CTP}.
 Numerous works are proposed to fabricate shapes 
-(i) with different objectives, e.g. maintain balance~\cite{Prevost:MIS:2013,SpinIt:Baecher:2014}, reduce size~\cite{Luo:2012:CPM}, strengthen structure soundness~\cite{Zhou:2013:WSA} and generate specific sounds~\cite{Umetani:2016:PIR}, and 
-(ii) with different materials or building blocks, e.g. Lego~\cite{Luo:2015:LOL}, planar slices~\cite{Cignoni:2014:FMJ}, and interlocking puzzles~\cite{Song-2012-InterCubes}.
+(i) with different objectives, e.g.\chinky{,} maintain balance~\cite{Prevost:MIS:2013,SpinIt:Baecher:2014}, reduce size~\cite{Luo:2012:CPM}, strengthen \chireplace{structure}{structural} soundness~\cite{Zhou:2013:WSA} and generate specific sounds~\cite{Umetani:2016:PIR}, and 
+(ii) with different materials or building blocks, e.g.\chinky{,} Lego~\cite{Luo:2015:LOL}, planar slices~\cite{Cignoni:2014:FMJ}, and interlocking puzzles~\cite{Song-2012-InterCubes}.
 
 However, even with the fast developments of assist tools and algorithms, 3D printers still suffer from long production time, excessive material usage, and limited output size.
 To reduce the usage of print materials, Huang~\cite{Huang:2016:FRF} and Wu~\cite{Wu:2016:PAM} design devices and algorithms to print shapes in wireframe.
-Meanwhile, different internal structures are developed, e.g. the skin-frame structure~\cite{Wang:2013:CPO}, the honeycomb-like structure~\cite{Lu:2014:BSW}, and 2D laser cutting shape proxy~\cite{Song-2016-CofiFab}.
-To enable the large shape to be printed using 3D printers, Luo~\etal~\cite{Luo:2012:CPM} developed an iterative planar-cut method, aiming to fit decomposed parts in the 3D printing volume while considering factors such as assembility and aesthetics.
+Meanwhile, \chireplace{different internal structures are developed}{several research papers develop different internal structures}, e.g.\chinky{,} the skin-frame structure~\cite{Wang:2013:CPO}, the honeycomb-like structure~\cite{Lu:2014:BSW}, and 2D laser cutting shape proxy~\cite{Song-2016-CofiFab}.
+To enable the large shape to be printed using 3D printers, Luo~\etal~\cite{Luo:2012:CPM} developed an iterative planar-cut method, aiming to fit decomposed parts in the 3D printing volume while considering factors such as \chireplace{assembility}{assemblability} and aesthetics.
 Yao~\etal~\cite{Yao:2015:LPP} proposed a level-set framework for 3D shape partition and packing.
-Compared to these works, our method fabricate a shape with both Zometool structure and 3D-printed parts, so that we can reduce the fabrication time and cost, with the reusability of Zometool structures. 
+Compared to these works, our method fabricate\chinky{s} a shape with both Zometool structure and 3D-printed parts, so that we can reduce the fabrication time and cost, with the reusability of Zometool structures. 
 
 \subsection{Zometool Design and Modeling}
 Zometool is a mathematically-precise plastic construction set for building a myriad of geometric structures~\cite{davis2007mathematics}, from simple polygons to visualize and model various natural sciences, e.g. DNA molecules.
-It's history dated back to to the 1960s where it started out as a simple construction system inspired by Buckminster Fulleresque geodesic domes, and it evolved from simple toy to versatile modeling tools through years.
-Although we can use it to construct complex structure, it's not intuitive for naive users to use and meanwhile time-consuming.
+\chireplace{It's}{It is} history dated back to to the 1960s where it started out as a simple construction system inspired by Buckminster Fulleresque geodesic domes, and it evolved from simple toy to versatile modeling tools through years.
+Although we can use it to construct \chinky{the} complex structure, it's not intuitive for naive users to use and meanwhile time-consuming.
 
-Tools are developed to help users to design the Zometool structures, e.g. vZome \cite{SVZ} and ZomeCAD \cite{ESZ}.
+Tools are developed to help users to design the Zometool structures, e.g.\chinky{,} vZome \cite{SVZ} and ZomeCAD \cite{ESZ}.
 These systems provide different ways to grow the structure.
-However, the difficulties remain when it comes to build a complex structure because it lacks the ability to provide useful suggestions about what kinds of structure to use next in order to build the target shape.
+\chireplace{However, the difficulties remain when it comes to build a complex structure because it lacks the ability to provide useful suggestions about what kinds of structure to use next in order to build the target shape.}{However, they cannot provide useful suggestions about what kinds of structure to use next to build the target shape. The difficulties remain when building a complex structure.}
+%
 
-This motivates works toward automatic construction through computational method.
+\chireplace{This}{Based on the above reason, it} motivates works toward automatic construction through computational method.
 Zimmer~\cite{zimmer:2014:Zometool,zimmer:2014:tvcg} approximate and realize freeform surface automatically using Zometool.
 Zimmer~\cite{zimmer:2014:tvcg} adopt an incremental panels growing strategy to approximate the surface without self-collisions.
-On the other hand, Zimmer~\cite{zimmer:2014:Zometool} first build up a rough initial Zometool structure and explore the modification space using local operations. The final Zometool structure is obtained by a stochastic optimization framework.
+On the other hand, Zimmer~\cite{zimmer:2014:Zometool} first build up a rough initial Zometool structure and explore the modification space using local operations. 
+\chireplace{The final Zometool structure is obtained by a stochastic optimization framework.}{They use a stochastic optimization framework to obtain the final Zometool structure.}
+
 
 \subsection{Mesh Segmentation}
 Mesh Segmentation is an important step for decreasing the complexity of the mesh by splitting the original mesh into many small segments. 
@@ -37,7 +40,7 @@ There are a lot of 3D mesh segmentation algorithms which have been proposed, inc
 In our method, we intend to segment shape so that the resulted segments are printable by the 3D printer, and meanwhile is able to be connected to the internal Zometool structure.
 % Our purpose of segmentation is for 3D printing for user to assemble the separate pieces, so we select two methods, graph cuts~\cite{boykov:2004:experimental, golovinskiy:2008:randomized} and SVM planar cut~\cite{wang2016improved}. 
 We achieve this by designing a two stages process that combines the advantages of MRF-based method~\cite{boykov:2004:experimental} and SVM planar cut~\cite{wang2016improved}.
-The final segmented parts can be easily assembled with optimized Zometool structure.
+\chireplace{The final segmented parts can be easily assembled with optimized Zometool structure.}{The segmented parts are assembled with the optimized Zometool structure to form the final result.}
 % The method of graph-cuts ~\cite{boykov:2004:experimental} helps us classify the triangele of mesh to the Zome-ball of inner structure. 
 % However, most segmentation methods just classify the triangle of mesh and we can't get the smooth edges. 
 % It hard for user to assemble the pieces which have the sharp edges, so the method of planar cut is our first choice. 
