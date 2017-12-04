@@ -64,14 +64,17 @@ If the user just has single 3{D} printer and wants to get a exquisite result, ou
 Table \ref{tab:result_Zometool} shows the quantity of Zometool rods and balls used in each result. 
 In \secname~\ref{sec:Zometool}, we use smallest blue rods to make the zome-cube as the unit structure in order to make the best-fit initial structure. 
 The bigger the object is, more smallest blue rods (${b_0}$) will be used.
-Also, Zometool components has some special relationships between each of them: 
-\begin{itemize}
-\item The blue rods and yellow rods are more compatible than the blue rods and red rods. 
-\item The longest rod only can be replaced by one shortest and middle rod in the same color.
-\end{itemize}
-So the number of smallest yellow rods will increase if we use more smallest blue rods. 
-Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
+We also observed that, blue rods and yellow rods are more likely to be used interchangeably since we encourage regularity during  simulated annealing optimization. 
+% So the number of smallest yellow rods will increase if we use more smallest blue rods.
+Meanwhile, the rule of Zometool indicates that the longest rod only can be replaced by one shortest and middle rod in the same color.
+So it seldom introduce red rods into the structure, which resulted in the used number of rods imbalance shown in \tabname~\ref{tab:result_Zometool}.
+% Also, Zometool components has some special relationships between each of them: 
+% \begin{itemize}
+% \item The blue rods and yellow rods are more compatible than the blue rods and red rods. 
+% \item The longest rod only can be replaced by one shortest and middle rod in the same color.
+% \end{itemize}
 
+Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
 %The red rods, middle rods and long rods in all colors used few or none in our simulated annealing rule.
 
 \begin{table*}[ht]
