@@ -2,34 +2,75 @@
 \label{sec:result}
 
 \subsection{Experiment environment}
-We implement ZomeFab in C++ (most) and Python on desktop PC with 3.4GHz CPU and 16GB memory. 
-The assembling processes are showed in Table \ref{tab:result_ZomeFab_real}. The inner structure is built by Zometool which can construct a strong structure easily. 
-The outer surfaces are printed by Ultimaker 3, a low-cost FDM 3{D} printer with 0.2m x 0.2m x 0.2m printing volume and PLA material. The time it takes to assemble the fabricated parts for these mesh ranges from few minutes to around an hour, depending on the number of parts.
+We implement ZomeFab in C++ and Python on desktop PC with 3.4GHz CPU and 16GB memory. 
+% The assembling processes are showed in Table \ref{tab:result_ZomeFab_real}. 
+% The inner structure is built by Zometool which can construct a strong structure easily. 
+The outer surfaces are printed by Ultimaker 3, a low-cost FDM 3{D} printer with 0.2m x 0.2m x 0.2m printing volume and PLA material. 
+The time it takes to assemble the fabricated parts for these objects range from few minutes to around an hour, depending on the number of parts.
 
 \subsection{Evaluation}
-We evaluate the material cost and fabrication time between Zomefab and solid mesh with simple partition. We use CURA (version 2.7.0), a slicer software for 3{D} printing, to help us evaluate it. The software will evaluate the fabrication time and the a amount of materials if the volume of input mesh is printable. In Table \ref{tab:result_material} and Table \ref{tab:result_time}, we demonstrate four experiments for each mesh, print hollowed with 20\% infill and print solid by Zomefab and baseline that partitions a solid object into 3D printable parts. \\
-The experiment assumes two conditions: 
-\begin{enumerate}
-\item Baseline is that it prints input mesh as pieces and use 3D printer only. (We use octree for segmentation)
-\item In multiple 3{D} printer experiment, we have enough  3D printers like the maker’s studio that we can print all pieces simultaneously. 
-\end{enumerate}
-The following context will discuss the material cost and the printing time.
+We evaluate the material cost and fabrication time between ``Zomefab" and solid-printed object (denoted as ``baseline" method).
+% with simple partition method. 
+We use CURA~\cite{}, a slicer software for 3{D} printing, to simulate the fabrication time and used materials for solid-printed object.
+Meanwhile, we subdivide the shape using a octree, and stop the subdivision once each sub-shape fit into the printing volume.
+% The software will evaluate the fabrication time and the a amount of materials if the volume of input mesh is printable.
+To evaluate our method, we report two different infill methods called ``hollow" and ``solid".
+Shapes printed under ``hollow" use only 20\% infill rate, where ``solid" use 100\% infill rate.
+Note that we only use 20\% infill rate to fabricate the results shown in this paper, and the ``solid" results are simulated using CURA.
+% As shown in \tabname~\ref{tab:result_material}, our method greatly saves materials from 24\% to 64\% under ``hollow" setting, and from 68\% to 85\% under ``solid" setting.
+% As expected that our method brings more benefits when infill rate grows.
+% In terms of fabrication time evaluation, we report both single 3D printer scenario and multiple 3D printer scenario.
+% In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
+
+% As reported in \tabname~\ref{tab:result_material} and \tabname~\ref{tab:result_time}, our method saves 
+% we evaluate 
+% four configurations for each object:
+% \begin{itemize}
+%     \item hollow-printed with 20\% infill
+%     \item solid-printed using Zomefab
+%     \item 
+% \end{itemize}
+% demonstrate four experiments for each object, print hollowed with 20\% infill and print solid by Zomefab and baseline that partitions a solid object into 3D printable parts. \\
+% The experiment assumes two conditions: 
+% \begin{enumerate}
+% \item Baseline is that it prints input mesh as pieces and use 3D printer only. (We use octree for segmentation)
+% \item In multiple 3{D} printer experiment, we have enough  3D printers like the maker’s studio that we can print all pieces simultaneously. 
+% \end{enumerate}
+% The following paragraph will discuss the material cost and the printing time.
 
 \subsubsection{Material cost}
-Material cost sets printing material: 0.56 USD/meter (Ultimaker official PLA material from official online shop, 90 meters sell 50 USD), Zometool rod: 0.19 USD/rod (from Zometool official online shop, 100 rods sell 19 USD) and Zome-ball: 0.29 USD/ball (from Zometool official online shop, 100 Zome-balls sell 29 USD) for our experiments. In Table \ref{tab:result_material}, all of experiments show that our method cost less material than baseline. Even if we print the result in 20\% fill rate, we also saved about 25\% of the material cost.
+As shown in \tabname~\ref{tab:result_material}, our method greatly saves materials from 24\% to 64\% under ``hollow" setting, and from 68\% to 85\% under ``solid" setting.
+As expected that our method brings more benefits when infill rate grows.
+The material cost are listed as follow: 0.56 USD/meter (Ultimaker official PLA material price), Zometool rod: 0.19 USD/rod and Zome-ball: 0.29 USD/ball (Zometool official price) for our experiments. 
+% Material cost sets printing material: 0.56 USD/meter (Ultimaker official PLA material from official online shop, 90 meters sell 50 USD), Zometool rod: 0.19 USD/rod (from Zometool official online shop, 100 rods sell 19 USD) and Zome-ball: 0.29 USD/ball (from Zometool official online shop, 100 Zome-balls sell 29 USD) for our experiments. 
+% In Table \ref{tab:result_material}, all of experiments show that our method cost less material than baseline. Even if we print the result in 20\% fill rate, we also saved about 25\% of the material cost.
 
 \subsubsection{Printing time}
-In Table \ref{tab:result_time}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. In single 3{D} printer, the fabrication time is more than baseline in 20\% infill rate. We propose that our mesh's complexity is higher than baseline testing mesh. In multiple 3{D} printers, we assume that we have enough 3{D} printers, so our method just has to wait the piece which has the most printing time. The statistics show that our method printing time is absolutely faster than baseline in different fill rate by multiple 3{D} printers. It demonstrates that our method's printing time will decrease if user can use more 3{D} printers. (See \figname~\ref{fig:multi_printer}) If the user just has single 3{D} printer and wants to get a exquisite result, our method can also get lower cost and fabrication time.
+We report printing time evaluation under both single 3D printer scenario and multiple 3D printer scenario.
+In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
+In Table \ref{tab:result_time}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. 
+In single 3{D} printer scenario, the fabrication time of our method under ``hollow" configuration is longer than the baseline method.
+The main reason is because the pieces of baseline method fit the printing volume better (regularly cutted), where the printing paths can be optimized without the time waste on printing redundant support materials.
+And the pieces of our method is highly non-regular with connectors, so the printing paths is more complicated compare to baseline pieces.
+Note that as the infill rate grows, we can discover that the growing rate of our method is way less than the baseline method, and is able to save from 52\% to 68\% of printing time.
+% the fabrication time is more than baseline in 20\% infill rate. We propose that our mesh's complexity is higher than baseline testing mesh. 
+In multiple 3{D} printers scenario, we assume that we have enough 3{D} printers, so the reported time of our method is the longest printing time among all pieces.
+% our method just has to wait the piece which has the most printing time. 
+The statistics shows that our method printing time is absolutely faster than baseline in different fill rate using multiple 3{D} printers. 
+% It demonstrates that our method's printing time will decrease if user can use more 3{D} printers. (See \figname~\ref{fig:multi_printer}) 
+If the user just has single 3{D} printer and wants to get a exquisite result, our method can also get lower cost and fabrication time.
 
 \subsection{Zometool Use}
-Table \ref{tab:result_Zometool} shows the quantity of Zometool rods and balls about each result. In \secname~\ref{sec:Zometool}, we use smallest blue rods to make the zome-cube for the simple repeated structure in order to make the best-fit initial structure. The bigger structure will use more smallest blue rods (${b_0}$). Also, Zometool is created by unique math model, it has some special conditions: 
-\begin{enumerate}
+Table \ref{tab:result_Zometool} shows the quantity of Zometool rods and balls used in each result. 
+In \secname~\ref{sec:Zometool}, we use smallest blue rods to make the zome-cube as the unit structure in order to make the best-fit initial structure. 
+The bigger the object is, more smallest blue rods (${b_0}$) will be used.
+Also, Zometool components has some special relationships between each of them: 
+\begin{itemize}
 \item The blue rods and yellow rods are more compatible than the blue rods and red rods. 
-\item  The longest rod only can be replaced by one shortest and middle rod in same color.
-\end{enumerate}
-
-So the number of smallest
-yellow rods will increase if we use more smallest blue rods. Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
+\item The longest rod only can be replaced by one shortest and middle rod in the same color.
+\end{itemize}
+So the number of smallest yellow rods will increase if we use more smallest blue rods. 
+Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
 
 %The red rods, middle rods and long rods in all colors used few or none in our simulated annealing rule.
 

@@ -3,7 +3,7 @@
 
 \ichao{\figname~\ref{fig:nearest} and \figname~\ref{fig:cut_plane}} can be merged into one.
 
-As mentioned in the beginning of this paper, most of the consumer-level 3D printers have limited printing volumes.
+As mentioned \chireplace{in}{at} the beginning of this paper, most of the consumer-level 3D printers have limited printing volumes.
 In order to print our large-scale object, it is necessary to decompose the object into different partitions.
 Meanwhile, unlike traditional surface partition methods that only take surface features into consideration, we also need to consider the relationship between the outer surface partitions and the inner optimized Zometool structure.
 More specifically, we will place connectors between the outer and inner structure in order to connect them (we will describe the design of the connector in more detail in~\secname~\ref{}).
@@ -12,12 +12,12 @@ More specifically, we will place connectors between the outer and inner structur
 Naively, we can simply compute the distance from each triangle $t$ to all the nodes in $\mathbf{Z}$, and assign $t$ to the nearest node as it's label.
 However, inconsistency may arise among adjacent triangles, leading to unsatisfactory visual effects and assembly complexities (numerous small partitions might exist, see \figname~\ref{fig:nearest}). 
 To address this issue, we formulate the problem as a multi-label graph cut minimization.
-As each triangle $t$ can potentially correspond to different Zometool node, it gets assigned data cost for different corresponding nodes.
+As each triangle $t$ can potentially correspond to different Zometool node\chinky{s}, it gets assigned data cost for different corresponding nodes.
 Given $n$ elements, $k$ labels and $n\cdot k$ costs, finding the minimum assignment is a combinatorial problem and typical NP-hard.
 We employ Boykov~\cite{boykov:2004:experimental} to solve it.
 
 After the partition, we further regularize the boundaries between pieces by performing a multi-class classification.
-The major reason is that we seek smooth boundaries in order to ease the assembling process.
+The \chireplace{major}{} reason is that we seek smooth boundaries in order to ease the assembling process.
 % we have to find the method which can separate different labels. 
 % There are many partition methods we can choose. Because our result have to assemble, our segment can't have the sharp edges which may increase the assembling complexity. The planar-cut is our first choice. 
 We follow Wang~\cite{wang2016improved} and use the Support Vector Machine (SVM)~\cite{cortes1995support} classifier to find our cut-plane. 
@@ -33,13 +33,13 @@ We will describe the detail formulation and implementation of MRF problem and ho
 
 \subsection{Surface Partition}
 \paragraph{Optimization energy}
-We compute the assignment function $f$ that assign label to each triangle $t$, where $t \in T$, such that the labeling $f$ minimize the following energy $E(f)$:
+We compute the assignment function $f$ that assign label\chinky{s} to each triangle $t$, where $t \in T$, such that the labeling $f$ minimize the following energy $E(f)$:
 \begin{align} \label{eq:graph}
 E(f) = w_{data} * \sum_{t\in T}D(t, f_t) + w_{smoothness} * \sum_{t,s\in N} S(t, s, f_t, f_s),
 \end{align}
 and we optimize this function using multi-label graph-cut algorithm proposed by Boykov~\cite{boykov:2004:experimental}.
 In our setting, the entire outer nodes of $\mathcal{Z}$ are complete possible label set $L$.
-This $E(f)$ consists of two separate terms, i.e. data and smoothness.
+This $E(f)$ consists of two separate terms, i.e.\chinky{,} data and smoothness.
 Next, we will explain each term in more detail.
 
 \subsubsection{Data cost}
@@ -65,8 +65,8 @@ where $\theta_{p,q}$ and $\varphi_{p,q}$ are the dihedral angle and distance bet
 With the smoothness term, two adjacent triangles are likely to have consistent labels.
 
 \paragraph{User-guided saliency} 
-We observed that there are many salient regions on each of the object we used, e.g. we don't want the partition seam to go through the eyes and nose on the face~\figname~\ref{fig:saliency}.
-In order to preserve the salient region, we ask users to draw the region he thinks it's important to preserve, and we formulate this as part of the smoothness cost, which prevent the partition seam to cut through salient region~\figname~\ref{fig:saliency}.
+We observed that there are many salient regions on each of the object we used, e.g., we don't want the partition seam to go through the eyes and nose on the face \chireplace{~\figname~\ref{fig:saliency}}{(see ~\figname~\ref{fig:saliency})}.
+\chireplace{In order to}{To} preserve the salient region, we ask users to draw the region he thinks it's important to preserve, and we formulate this as part of the smoothness cost, which prevent\chinky{s} \chireplace{the partition seam}{partition seams} to cut through salient region\chireplace{~\figname~\ref{fig:saliency}}{(~\figname~\ref{fig:saliency})}..
 % Every mesh have some features, such as eyes, nose or other unique objects. 
 % But we can't get the feature information by only use relation of adjacent triangles. 
 % If we don't assign some information during process of graph cut, the result just like left of \figname~\ref{fig:saliency}, the mouth and nose will be split in later process. Our saliency information is given by user guidance. For example (see middle of \figname~\ref{fig:saliency}), the user think the mouse and the nose is the important feature on mesh, so mark those parts and hope the parts don't be split in later process. Since we give the saliency information, the marked regions usually assign in the same part and prevent the slice seam on those regions.
@@ -89,7 +89,7 @@ Origin result of graph cut may split some feature on the mesh. (Left of the figu
 
 \subsubsection{Our result}
 We solve the labeling problem~\eqname~\ref{eq:graph} with graph-cut and obtain 11 labels on the Maoi head object~\figname~\ref{fig:cut_plane}(a).
-Compare to the naive method (\figname~\ref{fig:nearest}), we obtain smaller partition numbers (11 v.s. 60), and each of them are with better shape and size.
+Compare to the naive method (\figname~\ref{fig:nearest}), we obtain \chinky{much} smaller partition numbers (11 v.s. 60), and each of them \chireplace{are}{is} with better shape and size.
 % Each label has better shape and size than that before reclassification. (See \figname~\ref{fig:cut_plane}(a)) Then, we have to separate each label into pieces for 3{D} printing.
 % Before the labeling optimization, there are too many labels (60 labels in \figname~\ref{fig:nearest}) and some labels are too small. 
 % By optimizing~\eqname~\ref{eq:mrf},
@@ -98,14 +98,14 @@ Compare to the naive method (\figname~\ref{fig:nearest}), we obtain smaller part
 \subsection{Object Cut}
 % There are many methods for mesh segmentation. The simple method is collecting all triangles of graph cut label, but it will cause the sharp edge. 
 In order to cut the physical object into pieces, we have to find the cut planes that separate the space occupied by the object.
-However, the boundaries between optimized partitions from previous step is not regularized enough for directly used as the separating plane. 
+However, the boundaries between optimized partitions from \chinky{the} previous step \chireplace{is}{are} not regularized enough for directly used as the separating plane. 
 % For easy assembling, we have to split the triangles and regularize the contact surface between different labels. 
 % We choose the planar cut for our method.
 It is very difficult to find a plane in 3{D} space because of the varied plane normal vectors.
-In order to obtain the desired cut planes, we analogize our problem to finding the separating plane in solving multi-class classification using Support Vector Machine (SVM).
-We use each triangle as a data sample, with it's location as feature vector and the optimized label from previous step as it's class.
+\chireplace{In order to}{To} obtain the desired cut planes, we analogize our problem to finding the separating plane in solving multi-class classification using Support Vector Machine (SVM).
+We use each triangle as a data sample, with it's location as \chinky{the} feature vector and the optimized label from \chinky{the} previous step as it's class.
 In short, SVM algorithm intend to find the best hyperplane which is the one that represents the largest separation, or margin, between the two adjacent classes. 
-And we use the obtained hyperplanes from SVM as our cut planes (\figname~\ref{fig:cut_plane}(b)).
+\chireplace{And}{Therefore,} we use the obtained hyperplanes from SVM as our cut planes (\figname~\ref{fig:cut_plane}(b)).
 
 % We use the SVM classifier to generate the cut-plane. The different label of vertex is our input for training. Then, we can get the hyperplane which will separate different labels of data. But we don't have to know the hyperplane which separate the nonadjacent labels. So before we start training, we find the neighbor pair and use the information that can let us know which hyperplane needs for split the label.  By collecting all the hyperplanes, like \figname~\ref{fig:cut_plane}, we can use those planes for segmentation.
 
