@@ -11,6 +11,16 @@ More specifically, we will place connectors between the outer and inner structur
 % with the optimized Zometool structure $\mathbf{Z}$ from \secname~\ref{sec:Zometool}.
 Naively, we can simply compute the distance from each triangle $t$ to all the nodes in $\mathbf{Z}$, and assign $t$ to the nearest node as it's label.
 However, inconsistency may arise among adjacent triangles, leading to unsatisfactory visual effects and assembly complexities (numerous small partitions might exist, see \figname~\ref{fig:nearest}). 
+
+\begin{wrapfigure}{R}{0.2\textwidth}
+    % \begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/nearest_node.pdf} 
+    % \caption{Simple classification. We assign each triangle to it's nearest node. But there are too many labels and some regions are too small for 3D printer to print it, So, we need to reclassify the result.}
+    \label{fig:nearest}
+    % \end{figure}
+\end{wrapfigure}
+
 To address this issue, we formulate the problem as a multi-label graph cut minimization.
 As each triangle $t$ can potentially correspond to different Zometool node\chinky{s}, it gets assigned data cost for different corresponding nodes.
 Given $n$ elements, $k$ labels and $n\cdot k$ costs, finding the minimum assignment is a combinatorial problem and typical NP-hard.
@@ -23,13 +33,6 @@ The \chireplace{major}{} reason is that we seek smooth boundaries in order to ea
 We follow Wang~\cite{wang2016improved} and use the Support Vector Machine (SVM)~\cite{cortes1995support} classifier to find our cut-plane. 
 We will describe the detail formulation and implementation of MRF problem and how to find the cut planes in the following paragraph.
 % The following context will describe more implementation details about graph cut and cut-plane.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.75\linewidth]{figs/nearest_node.pdf} 
-\caption{Simple classification. We assign each triangle to it's nearest node. But there are too many labels and some regions are too small for 3D printer to print it, So, we need to reclassify the result.}
-\label{fig:nearest}
-\end{figure}
 
 \subsection{Surface Partition}
 \paragraph{Optimization energy}

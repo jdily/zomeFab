@@ -16,14 +16,14 @@ There are many potential ways to generate \chinky{the} inner surface.
 The simplest method is that shrinking the mesh along the vertex normals.
 However, it sometimes generate\chinky{s} the surface with flipped triangles that stick out of the outer surface (\figname~\ref{fig:shrink_mesh} (b)).
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=1.0\linewidth]{figs/Shrink_mesh.pdf} 
-\caption{
-\ichao{Think about if we still need this figure.}
-(a) Original mesh (b) Shrunken mesh. Shrink the mesh along the vertex normals is the simple method, but sometimes the mesh will be broken.}
-\label{fig:shrink_mesh}
-\end{figure}
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=1.0\linewidth]{figs/Shrink_mesh.pdf} 
+% \caption{
+% \ichao{Think about if we still need this figure.}
+% (a) Original mesh (b) Shrunken mesh. Shrink the mesh along the vertex normals is the simple method, but sometimes the mesh will be broken.}
+% \label{fig:shrink_mesh}
+% \end{figure}
 To prevent this problem, we instead voxelize the original object, and remove the voxels that cover the original surface.
 \chireplace{And}{Moreover,} we use the \chireplace{outer surface}{outermost surface} of the remaining voxels as our inner surface for \chinky{solid mesh}(\figname~\ref{fig:inner_surface}).
 % use the voxelized mesh to handle it. 
@@ -111,7 +111,9 @@ We repeat this examination on all of the 62 slots on the Zome-balls, and we grow
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.0\linewidth]{figs/dig_hole.pdf} 
-\caption{Experiment: Dig holes on inner surface (a) result (b)  support materials can't be cleaned well}
+\caption{
+\ichao{Please remove the upper figure...}
+Experiment: Dig holes on inner surface (a) result (b)  support materials can't be cleaned well}
 \label{fig:exp_surface_dig}
 \end{figure}
 
