@@ -49,17 +49,16 @@ The material cost are listed as follow: 0.56 USD/meter (Ultimaker official PLA m
 We report printing time evaluation under both single 3D printer scenario and multiple 3D printer scenario.
 In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
 In Table \ref{tab:result_time}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. 
-In single 3{D} printer scenario, the fabrication time of our method under ``hollow" configuration is longer than the baseline method.
-The main reason is because the pieces of baseline method fit the printing volume better (regularly cutted), where the printing paths can be optimized without the time waste on printing redundant support materials.
-And the pieces of our method is highly non-regular with connectors, so the printing paths is more complicated compare to baseline pieces.
-Note that as the infill rate grows, we can discover that the growing rate of our method is way less than the baseline method, and is able to save from 52\% to 68\% of printing time.
+% In single 3{D} printer scenario, the fabrication time of our method under ``hollow" configuration is longer than the baseline method.
+% The main reason is because the pieces of baseline method fit the printing volume better (regularly cutted), where the printing paths can be optimized without the time waste on printing redundant support materials.
+% And the pieces of our method is highly non-regular with connectors, so the printing paths is more complicated compare to baseline pieces.
+% Note that as the infill rate grows, we can discover that the growing rate of our method is way less than the baseline method, and is able to save from 52\% to 68\% of printing time.
 % the fabrication time is more than baseline in 20\% infill rate. We propose that our mesh's complexity is higher than baseline testing mesh. 
-In multiple 3{D} printers scenario, we assume that we have enough 3{D} printers, so the reported time of our method is the longest printing time among all pieces.
+In multiple 3{D} printers scenario, we assume that we have enough 3{D} printers, and the reported time of our method is the longest printing time among all pieces.
 % our method just has to wait the piece which has the most printing time. 
-The statistics shows that our method printing time is absolutely faster than baseline in different fill rate using multiple 3{D} printers. 
+The statistics shows that our method printing time is absolutely faster than baseline in different fill rate using single and multiple 3{D} printers. 
 % It demonstrates that our method's printing time will decrease if user can use more 3{D} printers. (See \figname~\ref{fig:multi_printer}) 
-If the user just has single 3{D} printer and wants to get a exquisite result, our method can also get lower cost and fabrication time.
-
+% If the user just has single 3{D} printer and wants to get a exquisite result, our method can also get lower cost and fabrication time.
 \subsection{Zometool Use}
 Table \ref{tab:result_Zometool} shows the quantity of Zometool rods and balls used in each result. 
 In \secname~\ref{sec:Zometool}, we use smallest blue rods to make the zome-cube as the unit structure in order to make the best-fit initial structure. 
@@ -73,7 +72,6 @@ So it seldom introduce red rods into the structure, which resulted in the used n
 % \item The blue rods and yellow rods are more compatible than the blue rods and red rods. 
 % \item The longest rod only can be replaced by one shortest and middle rod in the same color.
 % \end{itemize}
-
 Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
 %The red rods, middle rods and long rods in all colors used few or none in our simulated annealing rule.
 
