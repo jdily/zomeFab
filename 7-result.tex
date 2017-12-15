@@ -46,17 +46,18 @@ The material cost are listed as follow: 0.56 USD/meter (Ultimaker official PLA m
 % In Table \ref{tab:result_material}, all of experiments show that our method cost less material than baseline. Even if we print the result in 20\% fill rate, we also saved about 25\% of the material cost.
 
 \subsubsection{Printing time}
-We report printing time evaluation under both single 3D printer scenario and multiple 3D printer scenario.
-In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
-In Table \ref{tab:result_cost}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. 
+We report printing time evaluation under single 3D printer scenario (although parallel printing scheduling is also possible with multiple 3D printer
+).
+% In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
+In Table \ref{tab:result_cost}, we demonstrate the statistical performance using single 3{D} printer. 
 % In single 3{D} printer scenario, the fabrication time of our method under ``hollow" configuration is longer than the baseline method.
 % The main reason is because the pieces of baseline method fit the printing volume better (regularly cutted), where the printing paths can be optimized without the time waste on printing redundant support materials.
 % And the pieces of our method is highly non-regular with connectors, so the printing paths is more complicated compare to baseline pieces.
 % Note that as the infill rate grows, we can discover that the growing rate of our method is way less than the baseline method, and is able to save from 52\% to 68\% of printing time.
 % the fabrication time is more than baseline in 20\% infill rate. We propose that our mesh's complexity is higher than baseline testing mesh. 
-In multiple 3{D} printers scenario, we assume that we have enough 3{D} printers, and the reported time of our method is the longest printing time among all pieces.
+% In multiple 3{D} printers scenario, we assume that we have enough 3{D} printers, and the reported time of our method is the longest printing time among all pieces.
 % our method just has to wait the piece which has the most printing time. 
-The statistics shows that our method printing time is absolutely faster than baseline in different fill rate using single and multiple 3{D} printers. 
+The statistics shows that our method printing time is absolutely faster than baseline in different fill rate using single 3D printers. 
 % It demonstrates that our method's printing time will decrease if user can use more 3{D} printers. (See \figname~\ref{fig:multi_printer}) 
 % If the user just has single 3{D} printer and wants to get a exquisite result, our method can also get lower cost and fabrication time.
 \subsection{Zometool Use}
