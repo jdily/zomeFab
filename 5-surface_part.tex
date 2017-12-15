@@ -6,7 +6,7 @@
 As mentioned \chireplace{in}{at} the beginning of this paper, most of the consumer-level 3D printers have limited printing volumes.
 In order to print our large-scale object, it is necessary to decompose the object into different partitions.
 Meanwhile, unlike traditional surface partition methods that only take surface features into consideration, we also need to consider the relationship between the outer surface partitions and the inner optimized Zometool structure.
-More specifically, we will place connectors between the outer and inner structure in order to connect them (we will describe the design of the connector in more detail in~\secname~\ref{}).
+More specifically, we will place connectors between the outer and inner structure in order to connect them (we will describe the design of the connector in more detail in~\secname~\ref{sec:fab}).
 % We aim to decompose the surface into different partitions for 3D printing
 % with the optimized Zometool structure $\mathbf{Z}$ from \secname~\ref{sec:Zometool}.
 Naively, we can simply compute the distance from each triangle $t$ to all the nodes in $\mathbf{Z}$, and assign $t$ to the nearest node as it's label.
@@ -17,7 +17,7 @@ However, inconsistency may arise among adjacent triangles, leading to unsatisfac
     \centering
     \includegraphics[width=1.0\linewidth]{figs/nearest_node.pdf} 
     % \caption{Simple classification. We assign each triangle to it's nearest node. But there are too many labels and some regions are too small for 3D printer to print it, So, we need to reclassify the result.}
-    \label{fig:nearest}
+    %\label{fig:nearest}
     % \end{figure}
 \end{wrapfigure}
 
@@ -92,7 +92,8 @@ Origin result of graph cut may split some feature on the mesh. (Left of the figu
 
 \subsubsection{Our result}
 We solve the labeling problem~\eqname~\ref{eq:graph} with graph-cut and obtain 11 labels on the Maoi head object~\figname~\ref{fig:cut_plane}(a).
-Compare to the naive method (\figname~\ref{fig:nearest}), we obtain \chinky{much} smaller partition numbers (11 v.s. 60), and each of them \chireplace{are}{is} with better shape and size.
+Compare to the naive method %(\figname~\ref{fig:nearest})
+, we obtain \chinky{much} smaller partition numbers (11 v.s. 60), and each of them \chireplace{are}{is} with better shape and size.
 % Each label has better shape and size than that before reclassification. (See \figname~\ref{fig:cut_plane}(a)) Then, we have to separate each label into pieces for 3{D} printing.
 % Before the labeling optimization, there are too many labels (60 labels in \figname~\ref{fig:nearest}) and some labels are too small. 
 % By optimizing~\eqname~\ref{eq:mrf},

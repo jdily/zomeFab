@@ -39,7 +39,7 @@ Note that we only use 20\% infill rate to fabricate the results shown in this pa
 % The following paragraph will discuss the material cost and the printing time.
 
 \subsubsection{Material cost}
-As shown in \tabname~\ref{tab:result_material}, our method greatly saves materials from 24\% to 64\% under ``hollow" setting, and from 68\% to 85\% under ``solid" setting.
+As shown in \tabname~\ref{tab:result_cost}, our method greatly saves materials from 24\% to 64\% under ``hollow" setting, and from 68\% to 85\% under ``solid" setting.
 As expected that our method brings more benefits when infill rate grows.
 The material cost are listed as follow: 0.56 USD/meter (Ultimaker official PLA material price), Zometool rod: 0.19 USD/rod and Zome-ball: 0.29 USD/ball (Zometool official price) for our experiments. 
 % Material cost sets printing material: 0.56 USD/meter (Ultimaker official PLA material from official online shop, 90 meters sell 50 USD), Zometool rod: 0.19 USD/rod (from Zometool official online shop, 100 rods sell 19 USD) and Zome-ball: 0.29 USD/ball (from Zometool official online shop, 100 Zome-balls sell 29 USD) for our experiments. 
@@ -48,7 +48,7 @@ The material cost are listed as follow: 0.56 USD/meter (Ultimaker official PLA m
 \subsubsection{Printing time}
 We report printing time evaluation under both single 3D printer scenario and multiple 3D printer scenario.
 In multiple 3D scenario, we assume there are enough 3D printers so that we can print all pieces simultaneously.
-In Table \ref{tab:result_time}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. 
+In Table \ref{tab:result_cost}, we demonstrate the statistical comparison of printing time between single 3{D} printer and multiple 3{D} printers. 
 % In single 3{D} printer scenario, the fabrication time of our method under ``hollow" configuration is longer than the baseline method.
 % The main reason is because the pieces of baseline method fit the printing volume better (regularly cutted), where the printing paths can be optimized without the time waste on printing redundant support materials.
 % And the pieces of our method is highly non-regular with connectors, so the printing paths is more complicated compare to baseline pieces.
@@ -75,89 +75,127 @@ So it seldom introduce red rods into the structure, which resulted in the used n
 Except the smallest yellow and blue rods, the other rods are used few or none in our simulated annealing rule.
 %The red rods, middle rods and long rods in all colors used few or none in our simulated annealing rule.
 
-\begin{table*}[ht]
-\centering
-\resizebox{1.\linewidth}{!} {
-\begin{tabular}{|c|c|c|c c c|c|} \hline
- \multirow{2}*{Mesh} & \multirow{2}*{Infill Method} & \multirow{2}*{Fabrication Method} & \multicolumn{3}{c|}{Material Cost (USD)} & Efficiency (Saved)\\\cline{4-7} 
- & & & 3D printing & Zometool & Overall (sum) & Material \\ \hline
- 
- \multirow{4}*{Moai} & \multirow{2}*{Hollow} & Zomefab & 82.56 & 70.57 & 153.13  & \multirow{2}*{13.83\%} \\ 
- &  & Baseline & 177.71 &  & 177.71 &\\\cline{2-7}
- & \multirow{2}*{Solid} & Zomefab & 170.9 & 70.57 & 241.47  & \multirow{2}*{65.11\%} \\
- &  & Baseline & 692.07 & & 692.07 &\\ \hline
-  
- \multirow{4}*{Squirrel} & \multirow{2}*{Hollow} & Zomefab & 100.38 & 77.55 & 177.93 & \multirow{2}*{21.74\%} \\ 
- &  & Baseline & 227.37 & & 227.37 &\\\cline{2-7}
- & \multirow{2}*{Solid} & Zomefab & 213.96 & 77.55 & 291.51  & \multirow{2}*{66.17\%}\\
- &  & Baseline & 861.66 & & 861.66 &\\ \hline
- 
- \multirow{4}*{Doraemon} & \multirow{2}*{Hollow} & Zomefab & 101.38 & 76.34 & 177.72 & \multirow{2}*{21.91\%}\\ 
- &  & Baseline & 227.59 & & 227.59 &\\\cline{2-7}
- & \multirow{2}*{Solid} & Zomefab & 227.78 & 76.34 & 304.12 &  \multirow{2}*{64.25\%}\\
- &  & Baseline & 850.79 & & 850.79 &\\ \hline
- 
-\multirow{4}*{Totoro} & \multirow{2}*{Hollow} & Zomefab & 72.32 & 61.48 & 133.80 & \multirow{2}*{25.20\%}\\ 
- &  & Baseline & 178.88 & & 178.88 &\\\cline{2-7}
- & \multirow{2}*{Solid} & Zomefab & 148.26 & 61.48 & 209.74 &  \multirow{2}*{77.44\%} \\
- &  & Baseline & 657.31 & & 657.31 &\\ \hline
- 
-\multirow{4}*{Iron Man} & \multirow{2}*{Hollow} & Zomefab & 73.99 & 57.76 & 131.75 & \multirow{2}*{34.12\%} \\ 
- &  & Baseline & 199.97 & & 199.97 &\\\cline{2-7}
- & \multirow{2}*{Solid} & Zomefab & 149.67 & 57.76 & 207.43 &  \multirow{2}*{72.93\%} \\
- &  & Baseline & 766.24 & & 766.24 &\\ \hline
- 
-\end{tabular}
-}
-\caption{ZomeFab's performance on saving material as compared to a baseline method.}
-\label{tab:result_material}
-\end{table*}
+%\begin{table*}[ht]
+%\centering
+%\resizebox{1.\linewidth}{!} {
+%\begin{tabular}{|c|c|c|c c c|c|} \hline
+% \multirow{2}*{Mesh} & \multirow{2}*{Infill Method} & \multirow{2}*{Fabrication Method} & \multicolumn{3}{c|}{Material Cost (USD)} & Efficiency (Saved)\\\cline{4-7} 
+% & & & 3D printing & Zometool & Overall (sum) & Material \\ \hline
+% 
+% \multirow{4}*{Moai} & \multirow{2}*{Hollow} & Zomefab & 82.56 & 70.57 & 153.13  & \multirow{2}*{13.83\%} \\ 
+% &  & Baseline & 177.71 &  & 177.71 &\\\cline{2-7}
+% & \multirow{2}*{Solid} & Zomefab & 170.9 & 70.57 & 241.47  & \multirow{2}*{65.11\%} \\
+% &  & Baseline & 692.07 & & 692.07 &\\ \hline
+%  
+% \multirow{4}*{Squirrel} & \multirow{2}*{Hollow} & Zomefab & 100.38 & 77.55 & 177.93 & \multirow{2}*{21.74\%} \\ 
+% &  & Baseline & 227.37 & & 227.37 &\\\cline{2-7}
+% & \multirow{2}*{Solid} & Zomefab & 213.96 & 77.55 & 291.51  & \multirow{2}*{66.17\%}\\
+% &  & Baseline & 861.66 & & 861.66 &\\ \hline
+% 
+% \multirow{4}*{Doraemon} & \multirow{2}*{Hollow} & Zomefab & 101.38 & 76.34 & 177.72 & \multirow{2}*{21.91\%}\\ 
+% &  & Baseline & 227.59 & & 227.59 &\\\cline{2-7}
+% & \multirow{2}*{Solid} & Zomefab & 227.78 & 76.34 & 304.12 &  \multirow{2}*{64.25\%}\\
+% &  & Baseline & 850.79 & & 850.79 &\\ \hline
+% 
+%\multirow{4}*{Totoro} & \multirow{2}*{Hollow} & Zomefab & 72.32 & 61.48 & 133.80 & \multirow{2}*{25.20\%}\\ 
+% &  & Baseline & 178.88 & & 178.88 &\\\cline{2-7}
+% & \multirow{2}*{Solid} & Zomefab & 148.26 & 61.48 & 209.74 &  \multirow{2}*{77.44\%} \\
+% &  & Baseline & 657.31 & & 657.31 &\\ \hline
+% 
+%\multirow{4}*{Iron Man} & \multirow{2}*{Hollow} & Zomefab & 73.99 & 57.76 & 131.75 & \multirow{2}*{34.12\%} \\ 
+% &  & Baseline & 199.97 & & 199.97 &\\\cline{2-7}
+% & \multirow{2}*{Solid} & Zomefab & 149.67 & 57.76 & 207.43 &  \multirow{2}*{72.93\%} \\
+% &  & Baseline & 766.24 & & 766.24 &\\ \hline
+% 
+%\end{tabular}
+%}
+%\caption{ZomeFab's performance on saving material as compared to a baseline method.}
+%\label{tab:result_material}
+%\end{table*}
+%
+%\begin{table*}[ht]
+%\centering
+%\resizebox{1.\linewidth}{!} {
+%\begin{tabular}{|c|c|c|c c c| c c c|c | c|} \hline
+% \multirow{2}*{Mesh} & \multirow{2}*{Infill Method} & \multirow{2}*{Fabrication Method} & \multicolumn{3}{c|}{Single 3{D} Printer Fabrication Time (hours)} & \multicolumn{3}{c|}{Multiple 3{D} Printer Fabrication Time (hours)} & \multicolumn{2}{c|}{Efficiency (Saved)}\\\cline{4-11} 
+% & & & 3D printing & Zometool & Overall (sum) & 3D printing & Zometool & Overall (max) & Single & Multiple\\ \hline
+% 
+% \multirow{4}*{Moai} & \multirow{2}*{Hollow} & Zomefab & 293.97 & 2.5 & 296.47 & 72.58 & 2.5 & 75.08 & \multirow{2}*{30.70\%} & \multirow{2}*{22.50\%}\\ 
+% &  & Baseline & 434.08 &  & 434.08 & 96.88 &  & 96.88 & &\\\cline{2-11}
+% & \multirow{2}*{Solid} & Zomefab & 523.20 & 2.5 & 525.70 & 108.13 & 2.5 & 110.63 & \multirow{2}*{77.75\%} & \multirow{2}*{68.80\%}\\
+% &  & Baseline & 2362.28 & & 2362.28 & 354.57 & & 354.57 & &\\ \hline
+%  
+% \multirow{4}*{Squirrel} & \multirow{2}*{Hollow} & Zomefab & 355.05 & 3.0 & 358.05 & 53.82 & 3.0 & 56.82 & \multirow{2}*{22.04\%} & \multirow{2}*{8.49\%}\\ 
+% &  & Baseline & 459.28 & & 459.28 & 62.07 & & 62.07 & &\\\cline{2-11}
+% & \multirow{2}*{Solid} & Zomefab & 643.65 & 3.0 & 646.65 & 93.97 & 3.0 & 96.97 & \multirow{2}*{76.57\%} & \multirow{2}*{77.94\%}\\
+% &  & Baseline & 2759.72 & & 2759.72 & 439.65 & & 439.65 & &\\ \hline
+% 
+% \multirow{4}*{Doraemon} & \multirow{2}*{Hollow} & Zomefab & 356.60 & 4.0 & 360.60 & 53.83 & 4.0 & 57.83 & \multirow{2}*{37.88\%} & \multirow{2}*{39.45\%}\\ 
+% &  & Baseline & 580.48 & & 580.48 & 88.90 & & 88.90 & &\\\cline{2-11}
+% & \multirow{2}*{Solid} & Zomefab & 643.65 & 4.0 & 647.65 & 93.97 & 4.0 & 97.97 & \multirow{2}*{57.71\%} & \multirow{2}*{77.74\%}\\
+% &  & Baseline & 1531.42 & & 1531.42 & 440.13 & & 440.13 & &\\ \hline
+% 
+%\multirow{4}*{Totoro} & \multirow{2}*{Hollow} & Zomefab & 273.68 & 3.0 & 276.68 & 29.37 & 3.0 & 32.37 & \multirow{2}*{27.76\%} & \multirow{2}*{31.46\%}\\ 
+% &  & Baseline & 383.02 & & 383.02 & 47.23 & & 47.23 & &\\\cline{2-11}
+% & \multirow{2}*{Solid} & Zomefab & 468.82 & 3.0 & 471.82 & 51.67 & 3.0 & 54.67 & \multirow{2}*{77.68\%} & \multirow{2}*{83.78\%}\\
+% &  & Baseline & 2113.42 & & 2113.42 & 337.07 & & 337.07 & &\\ \hline
+% 
+%\multirow{4}*{Iron Man} & \multirow{2}*{Hollow} & Zomefab & 282.30 & 2.0 & 284.30 & 47.57 & 2.0 & 49.57 & \multirow{2}*{34.98\%} & \multirow{2}*{18.67\%}\\ 
+% &  & Baseline & 437.25 & & 437.25 & 60.95 & & 60.95 & &\\\cline{2-11}
+% & \multirow{2}*{Solid} & Zomefab & 477.03 & 2.0 & 479.03 & 72.12 & 2.0 & 74.12 & \multirow{2}*{80.65\%} & \multirow{2}*{79.92\%}\\
+% &  & Baseline & 2475.22 & & 2475.22 & 369.10 & & 369.10 & &\\ \hline
+% 
+%\end{tabular}
+%}
+%\caption{ZomeFab's performance on time as compared to a baseline method.}
+%\label{tab:result_time}
+%\end{table*}
 
-\begin{table*}[ht]
+ \begin{table*}[ht]
 \centering
 \resizebox{1.\linewidth}{!} {
 \begin{tabular}{|c|c|c|c c c| c c c|c | c|} \hline
- \multirow{2}*{Mesh} & \multirow{2}*{Infill Method} & \multirow{2}*{Fabrication Method} & \multicolumn{3}{c|}{Single 3{D} Printer Fabrication Time (hours)} & \multicolumn{3}{c|}{Multiple 3{D} Printer Fabrication Time (hours)} & \multicolumn{2}{c|}{Efficiency (Saved)}\\\cline{4-11} 
- & & & 3D printing & Zometool & Overall (sum) & 3D printing & Zometool & Overall (max) & Single & Multiple\\ \hline
+ \multirow{2}*{Mesh} & \multirow{2}*{Infill Method} & \multirow{2}*{Fabrication Method} & \multicolumn{3}{c|}{Single 3{D} Printer Fabrication Time (hours)} & \multicolumn{3}{c|}{Material Cost (USD)} & \multicolumn{2}{c|}{Efficiency (Saved)}\\\cline{4-11} 
+ & & & 3D printing & Zometool & Overall (sum) & 3D printing & Zometool & Overall (max) & Time & Material\\ \hline
  
- \multirow{4}*{Moai} & \multirow{2}*{Hollow} & Zomefab & 293.97 & 2.5 & 296.47 & 72.58 & 2.5 & 75.08 & \multirow{2}*{30.70\%} & \multirow{2}*{22.50\%}\\ 
- &  & Baseline & 434.08 &  & 434.08 & 96.88 &  & 96.88 & &\\\cline{2-11}
- & \multirow{2}*{Solid} & Zomefab & 523.20 & 2.5 & 525.70 & 108.13 & 2.5 & 110.63 & \multirow{2}*{77.75\%} & \multirow{2}*{68.80\%}\\
- &  & Baseline & 2362.28 & & 2362.28 & 354.57 & & 354.57 & &\\ \hline
+ \multirow{4}*{Moai} & \multirow{2}*{Hollow} & Zomefab & 293.97 & 2.5 & 296.47 & 82.56 & 70.57 & 153.13 & \multirow{2}*{31.70\%} & \multirow{2}*{13.83\%}\\ 
+ &  & Baseline & 434.08 &  & 434.08 & 177.71 &  & 177.71 & &\\\cline{2-11}
+ & \multirow{2}*{Solid} & Zomefab & 523.20 & 2.5 & 525.70 & 170.9 & 70.57 & 241.47 & \multirow{2}*{77.75\%} & \multirow{2}*{65.11\%}\\
+ &  & Baseline & 2362.28 & & 2362.28 & 692.07 & & 692.07 & &\\ \hline
   
- \multirow{4}*{Squirrel} & \multirow{2}*{Hollow} & Zomefab & 355.05 & 3.0 & 358.05 & 53.82 & 3.0 & 56.82 & \multirow{2}*{22.04\%} & \multirow{2}*{8.49\%}\\ 
- &  & Baseline & 459.28 & & 459.28 & 62.07 & & 62.07 & &\\\cline{2-11}
- & \multirow{2}*{Solid} & Zomefab & 643.65 & 3.0 & 646.65 & 93.97 & 3.0 & 96.97 & \multirow{2}*{76.57\%} & \multirow{2}*{77.94\%}\\
- &  & Baseline & 2759.72 & & 2759.72 & 439.65 & & 439.65 & &\\ \hline
+ \multirow{4}*{Squirrel} & \multirow{2}*{Hollow} & Zomefab & 355.05 & 3.0 & 358.05 & 100.38 & 77.55 & 177.93 & \multirow{2}*{22.04\%} & \multirow{2}*{21.74\%}\\ 
+ &  & Baseline & 459.28 & & 459.28 & 227.37 & & 227.37 & &\\\cline{2-11}
+ & \multirow{2}*{Solid} & Zomefab & 643.65 & 3.0 & 646.65 & 213.96 & 77.55 & 291.51 & \multirow{2}*{76.57\%} & \multirow{2}*{66.17\%}\\
+ &  & Baseline & 2759.72 & & 2759.72 & 861.66 & & 861.66 & &\\ \hline
  
- \multirow{4}*{Doraemon} & \multirow{2}*{Hollow} & Zomefab & 356.60 & 4.0 & 360.60 & 53.83 & 4.0 & 57.83 & \multirow{2}*{37.88\%} & \multirow{2}*{39.45\%}\\ 
- &  & Baseline & 580.48 & & 580.48 & 88.90 & & 88.90 & &\\\cline{2-11}
- & \multirow{2}*{Solid} & Zomefab & 643.65 & 4.0 & 647.65 & 93.97 & 4.0 & 97.97 & \multirow{2}*{57.71\%} & \multirow{2}*{77.74\%}\\
- &  & Baseline & 1531.42 & & 1531.42 & 440.13 & & 440.13 & &\\ \hline
+ \multirow{4}*{Doraemon} & \multirow{2}*{Hollow} & Zomefab & 356.60 & 4.0 & 360.60 & 101.38 & 76.34 & 177.72 & \multirow{2}*{37.88\%} & \multirow{2}*{21.91\%}\\ 
+ &  & Baseline & 580.48 & & 580.48 & 227.59 & & 227.59 & &\\\cline{2-11}
+ & \multirow{2}*{Solid} & Zomefab & 643.65 & 4.0 & 647.65 & 227.78 & 76.34 & 304.12 & \multirow{2}*{57.71\%} & \multirow{2}*{64.25\%}\\
+ &  & Baseline & 1531.42 & & 1531.42 & 850.79 & & 850.79 & &\\ \hline
  
-\multirow{4}*{Totoro} & \multirow{2}*{Hollow} & Zomefab & 273.68 & 3.0 & 276.68 & 29.37 & 3.0 & 32.37 & \multirow{2}*{27.76\%} & \multirow{2}*{31.46\%}\\ 
- &  & Baseline & 383.02 & & 383.02 & 47.23 & & 47.23 & &\\\cline{2-11}
- & \multirow{2}*{Solid} & Zomefab & 468.82 & 3.0 & 471.82 & 51.67 & 3.0 & 54.67 & \multirow{2}*{77.68\%} & \multirow{2}*{83.78\%}\\
- &  & Baseline & 2113.42 & & 2113.42 & 337.07 & & 337.07 & &\\ \hline
+\multirow{4}*{Totoro} & \multirow{2}*{Hollow} & Zomefab & 273.68 & 3.0 & 276.68 & 72.32 & 61.48 & 133.80 & \multirow{2}*{27.76\%} & \multirow{2}*{36.38\%}\\ 
+ &  & Baseline & 383.02 & & 383.02 & 178.88 & & 178.88 & &\\\cline{2-11}
+ & \multirow{2}*{Solid} & Zomefab & 468.82 & 3.0 & 471.82 & 148.26 & 61.48 & 209.74 & \multirow{2}*{77.68\%} & \multirow{2}*{68.09\%}\\
+ &  & Baseline & 2113.42 & & 2113.42 & 657.31 & & 657.31 & &\\ \hline
  
-\multirow{4}*{Iron Man} & \multirow{2}*{Hollow} & Zomefab & 282.30 & 2.0 & 284.30 & 47.57 & 2.0 & 49.57 & \multirow{2}*{34.98\%} & \multirow{2}*{18.67\%}\\ 
- &  & Baseline & 437.25 & & 437.25 & 60.95 & & 60.95 & &\\\cline{2-11}
- & \multirow{2}*{Solid} & Zomefab & 477.03 & 2.0 & 479.03 & 72.12 & 2.0 & 74.12 & \multirow{2}*{80.65\%} & \multirow{2}*{79.92\%}\\
- &  & Baseline & 2475.22 & & 2475.22 & 369.10 & & 369.10 & &\\ \hline
+\multirow{4}*{Iron Man} & \multirow{2}*{Hollow} & Zomefab & 282.30 & 2.0 & 284.30 & 73.99 & 57.76 & 131.75 & \multirow{2}*{34.98\%} & \multirow{2}*{34.12\%}\\ 
+ &  & Baseline & 437.25 & & 437.25 & 199.97 & & 199.97 & &\\\cline{2-11}
+ & \multirow{2}*{Solid} & Zomefab & 477.03 & 2.0 & 479.03 & 149.67 & 57.76 & 207.43 & \multirow{2}*{80.65\%} & \multirow{2}*{72.93\%}\\
+ &  & Baseline & 2475.22 & & 2475.22 & 766.24 & & 766.24 & &\\ \hline
  
 \end{tabular}
 }
-\caption{ZomeFab's performance on time as compared to a baseline method.}
-\label{tab:result_time}
+\caption{ZomeFab's performance on saving time \& material time as compared to a baseline method.}
+\label{tab:result_cost}
 \end{table*}
 
-\begin{figure*}[ht]
-\centering
-\includegraphics[width=1.0\linewidth]{figs/multi_printer.pdf} 
-\caption{Printing time of Squirrel with different number of printers. If user use single 3D printer to print the result, our method's printing time will be more than baseline. The chart shows if the number of 3D printers are more than 2, the printing time will lower than baseline. If user has more than 6 3D printers, the printing time only has to wait the pieces which has the longest printing time.
-}
-\label{fig:multi_printer}
-\end{figure*}
+%\begin{figure*}[ht]
+%\centering
+%\includegraphics[width=1.0\linewidth]{figs/multi_printer.pdf} 
+%\caption{Printing time of Squirrel with different number of printers. If user use single 3D printer to print the result, our method's printing time will be more than baseline. The chart shows if the number of 3D printers are more than 2, the printing time will lower than baseline. If user has more than 6 3D printers, the printing time only has to wait the pieces which has the longest printing time.
+%}
+%\label{fig:multi_printer}
+%\end{figure*}
 
 \begin{table*}[ht]
 \centering
